@@ -178,6 +178,7 @@ def evaluate(X_data, y_data):
 
 # Train the Model
 saver = tf.train.Saver()
+save_file = './classifier/lenet.ckpt'
 
 from sklearn.utils import shuffle
 config = tf.ConfigProto(
@@ -204,12 +205,12 @@ with tf.Session(config=config) as sess:
         print("Validation accuracy = {:.3f}".format(val_acc))
         print()
 
-    saver.save(sess,'./lenet.ckpt')
+    saver.save(sess,save_file)
     print('Model saved')
 
 
 with tf.Session(config=config) as sess:
-    saver.restore(sess, tf.train.latest_checkpoint('.'))
+    saver.restore(sess, save_file)
 
     test_loss, test_acc = evaluate(X_test, y_test)
     print("Test loss = {:.3f}".format(test_loss))

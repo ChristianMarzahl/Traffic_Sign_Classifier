@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>28368b6d-30d6-48e6-aa44-a9a0c3ed481b</ProjectGuid>
+    <ProjectGuid>8d866132-0625-4d10-a1a3-510354d7c0e7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>TrafficSignClassifier.py</StartupFile>
     <SearchPath>
@@ -22,32 +22,24 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="export_train_data.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TitanicTest.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TrafficSignClassifier_Keras_Train.py" />
-    <Compile Include="TrafficSignClassifier_Predict.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TrafficSignClassifier_preprocessing.py" />
+    <Compile Include="export_train_data.py" />
     <Compile Include="TrafficSignClassifier.py" />
+    <Compile Include="TrafficSignClassifier_Keras_Train.py" />
+    <Compile Include="TrafficSignClassifier_Predict.py" />
+    <Compile Include="TrafficSignClassifier_preprocessing.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="classifier\" />
     <Folder Include="examples\" />
     <Folder Include="files\" />
-    <Folder Include="classifier\" />
     <Folder Include="images\" />
-    <Folder Include="images\14\" />
-    <Folder Include="images\2\" />
-    <Folder Include="images\22\" />
     <Folder Include="images\12\" />
+    <Folder Include="images\14\" />
     <Folder Include="images\15\" />
+    <Folder Include="images\22\" />
+    <Folder Include="images\2\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="classifier\checkpoint" />
     <Content Include="classifier\lenet.ckpt.data-00000-of-00001" />
     <Content Include="classifier\lenet.ckpt.index" />
@@ -56,12 +48,14 @@
     <Content Include="examples\placeholder.png" />
     <Content Include="examples\random_noise.jpg" />
     <Content Include="examples\visualization.jpg" />
+    <Content Include="files\signnames.csv" />
     <Content Include="files\test.p" />
     <Content Include="files\train.p" />
     <Content Include="files\train_augmented_gray.p" />
     <Content Include="files\valid.p" />
     <Content Include="images\12\images %281%29.jpg" />
     <Content Include="images\12\images %283%29.jpg" />
+    <Content Include="images\12\images %284%29.jpg" />
     <Content Include="images\12\images.jpg" />
     <Content Include="images\14\images %281%29.jpg" />
     <Content Include="images\14\images.jpg" />
@@ -76,7 +70,6 @@
     <Content Include="images\2\Speed2.jpg" />
     <Content Include="images\2\Speed_flat.jpg" />
     <Content Include="README.md" />
-    <Content Include="files\signnames.csv" />
     <Content Include="Traffic_Sign_Classifier.ipynb" />
     <Content Include="visualize_cnn.png" />
     <Content Include="writeup_template.md" />
