@@ -22,15 +22,15 @@ The goals / steps of this project are the following:
 [image1]: ./examples/visualization.jpg "Visualization"
 [image2]: ./examples/grayscale.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
 [image9]: ./examples/original_traffic_signs.png "Traffic Sign Overview"
 [image10]: ./examples/traffic_sign_count_overview.png "Traffic Sign Overview Count"
 [image11]: ./examples/gray_adaptive_hist.png "gray_adaptive_hist"
 [image12]: ./examples/DataArgumentationGray.png "DataArgumentationGray"
+
+[image20]: ./images/12/images (1).jpg "priority road"
+[image21]: ./images/12/images (3).jpg "priority road"
+[image22]: ./images/12/images (4).jpg "priority road"
+[image23]: ./images/12/images.jpg "priority road"
 
 
 ## Rubric Points
@@ -104,60 +104,62 @@ Here is an example of augmented images:
 
 ####3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-The code for my final model is located in the seventh cell of the ipython notebook. 
+The code for my final model is located in the * * *  cell of the ipython notebook. 
 
 My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
+| Input         		| 32x32x1 Gray image   							| 
+| Convolution 5x5     	| 1x1 stride, valid padding, outputs 28x28x20 	|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
+| Max pooling	      	| 2x2 stride,  valid padding, outputs 14x14x20 				|
+| Convolution 5x5     	| 1x1 stride, valid padding, outputs 10x10x40 	|
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  valid padding, outputs 5x5x40 				|
+| Fully connected		| input 1000, output 500   									|
+| RELU					|												|
+| Fully connected		| input 500, output 300   									|
+| Dropout					|	25%											|
+| RELU					|												|
+| Fully connected		| input 300, output 100   									|
+| Dropout					|	25%											|
+| RELU					|												|
+| Softmax				| input 100, output 43        									|
+
 
 
 ####4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-The code for training the model is located in the eigth cell of the ipython notebook. 
+The code for training the model is located in the * * *  cell of the ipython notebook. 
 
-To train the model, I used an ....
+To train the model, I used an AdamOptimizer with a learning rate of 0.001. The batch_size was 128 and I trained for 100 Epochs. The training dropout rate was set to 0.25. For weight initialization I used the truncated_normal function with mean of 0 and standard deviation of 0.1
+On my Windows machine I experienced a CuDNN exception that was not on the aws machine. That is the explanation for the line "evice_count = {'GPU': 0}" in my code to use CPU. 
 
 ####5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
-The code for calculating the accuracy of the model is located in the ninth cell of the Ipython notebook.
+The code for calculating the accuracy of the model is located in the * * * * cell of the Ipython notebook.
 
 My final model results were:
 * training set accuracy of ?
 * validation set accuracy of ? 
 * test set accuracy of ?
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to over fitting or under fitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+First I used the LeNet architecture because it was recomendet at the udacity course. I updated the model to handle the 43 output classes, better weight and bias initialisation and gray scale images.  
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+I increased the size of the FC Layer and added dropout to prevent offerfiting. The two steps increased the test accuracy by arround 2%. 
+
+Additional steps to improve the accuracy could be to add more Conv layers or use inception modules to use different patch sizes.  
+
 
 ###Test a Model on New Images
 
 ####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are some German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][image20] ![alt text][image21] ![alt text][image22] 
+![alt text][image23] ![alt text][image24]
 
 The first image might be difficult to classify because ...
 
