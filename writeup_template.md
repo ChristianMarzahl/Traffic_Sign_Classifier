@@ -30,6 +30,7 @@ The goals / steps of this project are the following:
 [image9]: ./examples/original_traffic_signs.png "Traffic Sign Overview"
 [image10]: ./examples/traffic_sign_count_overview.png "Traffic Sign Overview Count"
 [image11]: ./examples/gray_adaptive_hist.png "gray_adaptive_hist"
+[image12]: ./examples/DataArgumentationGray.png "DataArgumentationGray"
 
 
 ## Rubric Points
@@ -75,8 +76,9 @@ The following image show some example traffic signs and the code is  at the fift
 The code for this step is contained in the sixt code cell of the IPython notebook.
 
 As a first step, I decided to convert the images to grayscale because the paper from [Pierre Sermanet and Yann LeCun](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) suggest that color don´t have a big positive impact on the result. 
+At the same time I performed a image rezise to 32x32.
 
-To decrease the effect of different light conditions one the traffic signs i used a [local histogram equalization](http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html) 
+To decrease the effect of different light conditions one the traffic signs I used a [local histogram equalization](http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html) 
 
 ![alt text][image11]
 
@@ -84,20 +86,21 @@ As a last step after the  Keras data argumentation, I normalized the image data 
 
 ####2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
-The code for splitting the data into training and validation sets is contained in the fifth code cell of the IPython notebook.  
+The traffic sign dataset was already splitted into train, test and validation. The code for loading the data is in the first code block. 
 
-To cross validate my model, I randomly split the training data into a training set and validation set. I did this by ...
+The * * * code cell of the IPython notebook contains the code for augmenting the data set with the Keras [ImageDataGenerator](https://keras.io/preprocessing/image/).
+I decided to generate additional data because the traffic sign classes where not balanced. 
+To add more data to the the data set, I used the following techniques
 
-My final training set had X number of images. My validation set and test set had Y and Z number of images.
+1. rotation_range to simulate traffic signs on rising  roads with a max angle of 20°
+2. width_shift_range and height_shift_range to make the classfier more robust to where the traffic sign is located insight  the image 
+3. zoom_range to simulate different traffic sign sizes from the same type and that the sign ist not entirely  visible
 
-The sixth code cell of the IPython notebook contains the code for augmenting the data set. I decided to generate additional data because ... To add more data to the the data set, I used the following techniques because ... 
+After the data argumentation I saved the images to file for later reusability  
 
-Here is an example of an original image and an augmented image:
+Here is an example of augmented images:
 
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
-
+![alt text][image12]
 
 ####3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
