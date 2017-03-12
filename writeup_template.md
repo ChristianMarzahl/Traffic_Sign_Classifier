@@ -29,6 +29,8 @@ The goals / steps of this project are the following:
 [image8]: ./examples/placeholder.png "Traffic Sign 5"
 [image9]: ./examples/original_traffic_signs.png "Traffic Sign Overview"
 [image10]: ./examples/traffic_sign_count_overview.png "Traffic Sign Overview Count"
+[image11]: ./examples/gray_adaptive_hist.png "gray_adaptive_hist"
+
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -42,7 +44,7 @@ The goals / steps of this project are the following:
 
 ####1. Provide a basic summary of the data set and identify where in your code the summary was done. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-The code for this step is contained in the second code cell of the IPython notebook.  
+The code for this step is contained in the second and third code cell of the IPython notebook.  
 
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
@@ -54,12 +56,14 @@ signs data set:
 
 ####2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
+The code for the barchart is contained in the fourth code cell
 
 ![alt text][image10]
 
 The Traffic Sign distribution shows that the number of signs for each classes have a strong variance. At the data augmentation step, this problem should be addressed to prevent a classification bias at one class. 
 
-The following image show some example traffic signs 
+
+The following image show some example traffic signs and the code is  at the fifth cell of the notebook
 
 ![alt text][image9]
 
@@ -68,15 +72,15 @@ The following image show some example traffic signs
 
 ####1. Describe how, and identify where in your code, you preprocessed the image data. What tecniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
 
-The code for this step is contained in the fourth code cell of the IPython notebook.
+The code for this step is contained in the sixt code cell of the IPython notebook.
 
-As a first step, I decided to convert the images to grayscale because ...
+As a first step, I decided to convert the images to grayscale because the paper from [Pierre Sermanet and Yann LeCun](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) suggest that color don´t have a big positive impact on the result. 
 
-Here is an example of a traffic sign image before and after grayscaling.
+To decrease the effect of different light conditions one the traffic signs i used a [local histogram equalization](http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html) 
 
-![alt text][image2]
+![alt text][image11]
 
-As a last step, I normalized the image data because ...
+As a last step after the  Keras data argumentation, I normalized the image data because thats lead to a more stable convergence of weight and biases.
 
 ####2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
