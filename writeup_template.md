@@ -27,11 +27,26 @@ The goals / steps of this project are the following:
 [image11]: ./examples/gray_adaptive_hist.png "gray_adaptive_hist"
 [image12]: ./examples/DataArgumentationGray.png "DataArgumentationGray"
 
-[image20]: ./images/12/images (1).jpg "priority road"
-[image21]: ./images/12/images (3).jpg "priority road"
-[image22]: ./images/12/images (4).jpg "priority road"
+[image20]: ./images/12/images%20(1).jpg "priority road"
+[image21]: ./images/12/images%20(3).jpg "priority road"
+[image22]: ./images/12/images%20(4).jpg "priority road"
 [image23]: ./images/12/images.jpg "priority road"
 
+[image25]: ./images/14/images%20(1).jpg "stop sign"
+[image26]: ./images/14/images.jpg "stop sign"
+[image27]: ./images/14/stop_1.jpg "stop sign"
+
+[image30]: ./images/15/NoVehile.jpg 
+[image31]: ./images/15/images%20(1).jpg
+[image32]: ./images/15/images.jpg 
+
+[image35]: ./images/2/Speed2.jpg 
+[image36]: ./images/2/Speed_flat.jpg
+[image37]: ./images/2/images.jpg
+
+[image40]: ./images/22/bum.jpg
+[image41]: ./images/22/bumb2.jpg
+[image42]: ./images/22/bumby.jpg
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -158,10 +173,24 @@ Additional steps to improve the accuracy could be to add more Conv layers or use
 
 Here are some German traffic signs that I found on the web:
 
-![alt text][image20] ![alt text][image21] ![alt text][image22] 
-![alt text][image23] ![alt text][image24]
-
-The first image might be difficult to classify because ...
+| Image     | Difficultys |
+|:---------------------:|:---------------------------------------------:| 
+| ![alt text][image20] | <ul><li> Watermarks </li><li> The image is smaler than the images in the trainings data  </li></ul>|
+| ![alt text][image21] | <ul><li> Watermarks </li></ul> |
+| ![alt text][image22] | <ul><li> Watermarks </li><li> Unusual traffic sign viewpoint  </li></ul> |
+| ![alt text][image23] | <ul><li> Unusual position </li></ul> |
+| ![alt text][image25] | <ul><li> No difficultys </li></ul> |
+| ![alt text][image26] | <ul><li> No difficultys </li></ul> |
+| ![alt text][image27] | <ul><li> No difficultys </li></ul> |
+| ![alt text][image30] | <ul><li> Watermarks </li><li> The image is smaler than the images in the trainings data  </li></ul> |
+| ![alt text][image31] | <ul><li> Watermarks </li></ul> |
+| ![alt text][image32] | <ul><li> Watermarks </li></ul> |
+| ![alt text][image35] | <ul><li> No difficultys </li></ul> |
+| ![alt text][image36] | <ul><li> traffic sign painted on the road </li></ul> |
+| ![alt text][image37] | <ul><li> No difficultys </li></ul> |
+| ![alt text][image40] | <ul><li> No difficultys </li></ul> |
+| ![alt text][image41] | <ul><li> No difficultys  </li></ul> |
+| ![alt text][image42] | <ul><li> Watermarks </li></ul> |
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
