@@ -91,7 +91,7 @@ def LeNet(x, image_channels, n_classes,keep_prob):
     conv1   = tf.nn.conv2d(x, conv1_W, strides=[1, 1, 1, 1], padding='VALID') + conv1_b
     #Activation.
     conv1 = tf.nn.relu(conv1)
-    #Pooling. Input = 28x28x6. Output = 14x14x6.
+    #Pooling. Input = 28x28x20. Output = 14x14x20.
     conv1 = tf.nn.max_pool(conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='VALID')
 
     #Layer 2:
@@ -104,36 +104,31 @@ def LeNet(x, image_channels, n_classes,keep_prob):
     #Pooling. Input = 10x10x40. Output = 5x5x40.
     conv2 = tf.nn.max_pool(conv2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='VALID')
 
-    #Flatten. Input = 5x5x40. Output = 1000.
-    fc0   = flatten(conv2)
+    #Flatten. Input1 = 5x5x40. Input2 = 16*16*20  Output = 4920.
+    fc0   = tf.concat(1, [flatten(conv2),flatten(conv1)])
+
     
-    #Layer3  1000 --> 500
-    fc1_W = tf.Variable(tf.truncated_normal(shape = (1000,500), mean = mu , stddev = sigma), name = 'fc1_W')
-    fc1_b = tf.Variable(tf.truncated_normal(shape=[500], mean = mu, stddev = sigma), name = 'fc1_b')
-    fc1 = tf.add(tf.matmul(fc0, fc1_W) , fc1_b)   
+    #Layer3  4920 --> 1500
+    fc1_W = tf.Variable(tf.truncated_normal(shape = (4920,1500), mean = mu , stddev = sigma), name = 'fc1_W')
+    fc1_b = tf.Variable(tf.truncated_normal(shape=[1500], mean = mu, stddev = sigma), name = 'fc1_b')
+    fc1 = tf.add(tf.matmul(fc0, fc1_W) , fc1_b)  
+     #Dropout 
+    fc1 = tf.nn.dropout(fc1,keep_prob)    
     fc1 = tf.nn.relu(fc1) 
   
-    #Layer4 500 --> 300
-    fc2_W = tf.Variable(tf.truncated_normal(shape = (500,300), mean = mu , stddev = sigma), name = 'fc2_W')
-    fc2_b = tf.Variable(tf.truncated_normal(shape=[300], mean = mu, stddev = sigma), name = 'fc2_b')
-    fc2 = tf.add(tf.matmul(fc1,fc2_W) , fc2_b)    
+    #Layer5 1500 --> 500
+    fc2_W = tf.Variable(tf.truncated_normal(shape = (1500,500), mean = mu, stddev = sigma), name = 'fc2_W')
+    fc2_b = tf.Variable(tf.truncated_normal(shape=[500], mean = mu, stddev = sigma), name = 'fc2_b')
+    fc2 = tf.add(tf.matmul(fc1,fc2_W) , fc2_b)
     #Dropout 
     fc2 = tf.nn.dropout(fc2,keep_prob)
     fc2 = tf.nn.relu(fc2)
-    
-    #Layer5 300 --> 100
-    fc3_W = tf.Variable(tf.truncated_normal(shape = (300,100), mean = mu, stddev = sigma), name = 'fc3_W')
-    fc3_b = tf.Variable(tf.truncated_normal(shape=[100], mean = mu, stddev = sigma), name = 'fc3_b')
-    fc3 = tf.add(tf.matmul(fc2,fc3_W) , fc3_b)
-    #Dropout 
-    fc3 = tf.nn.dropout(fc3,keep_prob)
-    fc3 = tf.nn.relu(fc3)
 
 
     #Layer6 100 --> 43
-    fc4_W = tf.Variable(tf.truncated_normal(shape = (100,n_classes), mean = mu, stddev = sigma), name = 'fc4_W')
-    fc4_b = tf.Variable(tf.truncated_normal(shape=[n_classes], mean = mu, stddev = sigma), name = 'fc4_b')
-    logits = tf.add(tf.matmul(fc3,fc4_W) , fc4_b)
+    fc3_W = tf.Variable(tf.truncated_normal(shape = (500,n_classes), mean = mu, stddev = sigma), name = 'fc3_W')
+    fc3_b = tf.Variable(tf.truncated_normal(shape=[n_classes], mean = mu, stddev = sigma), name = 'fc3_b')
+    logits = tf.add(tf.matmul(fc2,fc3_W) , fc3_b)
 
     return logits
 
@@ -161,7 +156,7 @@ accuracy_operation = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 # Model Evaluation
 
-BATCH_SIZE = 1024
+BATCH_SIZE = 256
 EPOCHS = 100
 
 def evaluate(X_data, y_data):
@@ -203,10 +198,12 @@ with tf.Session(config=config) as sess:
         print("EPOCH {} ...".format(i+1))
         print("Validation loss = {:.3f}".format(val_loss))
         print("Validation accuracy = {:.3f}".format(val_acc))
-        print()
 
-    saver.save(sess,save_file)
-    print('Model saved')
+        if(last_val_acc < val_acc):
+             last_val_acc = val_acc
+             saver.save(sess,save_file)
+             print('Model saved')
+        print()
 
 
 with tf.Session(config=config) as sess:
