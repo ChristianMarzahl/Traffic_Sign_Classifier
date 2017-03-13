@@ -132,15 +132,14 @@ My final model consisted of the following layers:
 | Convolution 5x5     	| 1x1 stride, valid padding, outputs 10x10x40 	|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride,  valid padding, outputs 5x5x40 				|
-| Fully connected		| input 1000, output 500   									|
 | RELU					|												|
-| Fully connected		| input 500, output 300   									|
+| Concat					|		input conv1 = 5x5x40. input conv2 = 16*16*20  Output = 4920.										|
+| Fully connected		| input 4920, output 1500   									|
+| Dropout					|	25%											|
+| Fully connected		| input 1500, output 500   									|
 | Dropout					|	25%											|
 | RELU					|												|
-| Fully connected		| input 300, output 100   									|
-| Dropout					|	25%											|
-| RELU					|												|
-| Softmax				| input 100, output 43        									|
+| Softmax				| input 500, output 43        									|
 
 
 
@@ -148,7 +147,7 @@ My final model consisted of the following layers:
 
 The code for training the model is located in the * * *  cell of the ipython notebook. 
 
-To train the model, I used an AdamOptimizer with a learning rate of 0.001. The batch_size was 128 and I trained for 100 Epochs. The training dropout rate was set to 0.25. For weight initialization I used the truncated_normal function with mean of 0 and standard deviation of 0.1
+To train the model, I used an AdamOptimizer with a learning rate of 0.001. The batch_size was 256 and I trained for 100 Epochs. The training dropout rate was set to 0.25. For weight initialization I used the truncated_normal function with mean of 0 and standard deviation of 0.1
 On my Windows machine I experienced a CuDNN exception that was not on the aws machine. That is the explanation for the line "evice_count = {'GPU': 0}" in my code to use CPU. 
 
 ####5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
@@ -161,10 +160,10 @@ My final model results were:
 * test set accuracy of ?
 
 First I used the LeNet architecture because it was recomendet at the udacity course. I updated the model to handle the 43 output classes, better weight and bias initialisation and gray scale images.  
+I increased the size and count of the FC Layer and added dropout to prevent offerfiting. The two steps increased the test accuracy by arround 2%. 
+After that I tested the architecture descripted at [Pierre Sermanet and Yann LeCun](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) which lead to much better results. I added a aditional FC layer because ["No hidden layer should be less than a quarter of the input layer’s nodes."](https://deeplearning4j.org/troubleshootingneuralnets) 
 
-I increased the size of the FC Layer and added dropout to prevent offerfiting. The two steps increased the test accuracy by arround 2%. 
-
-Additional steps to improve the accuracy could be to add more Conv layers or use inception modules to use different patch sizes.  
+Additional steps to improve the accuracy could be to use inception modules to use different patch sizes.  
 
 
 ###Test a Model on New Images
