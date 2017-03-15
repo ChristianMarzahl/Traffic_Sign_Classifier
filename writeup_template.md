@@ -65,7 +65,7 @@ The goals / steps of this project are the following:
 
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
 ---
 ### Writeup / README
@@ -106,26 +106,26 @@ The following image show some example traffic signs and the code is  at the fift
 
 The code for this step is contained in the sixt code cell of the IPython notebook.
 
-As a first step, I decided to convert the images to grayscale because the paper from [Pierre Sermanet and Yann LeCun](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) suggest that color don´t have a big positive impact on the result. 
+As a first step, I decided to convert the images to grayscale because the paper from [Pierre Sermanet and Yann LeCun](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) suggest that color don't have a big positive impact on the result. 
 At the same time I performed a image rezise to 32x32.
 
 To decrease the effect of different light conditions one the traffic signs I used a [local histogram equalization](http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html) 
 
 ![alt text][image11]
 
-As a last step after the  Keras data argumentation, I normalized the image data because thats lead to a more stable convergence of weight and biases.
+As a last step after the  Keras data argumentation, I normalized the image data because that's lead to a more stable convergence of weight and biases.
 
 #### 2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
 The traffic sign dataset was already splitted into train, test and validation. The code for loading the data is in the first code block. 
 
-The sixt to ninth code cell of the IPython notebook contains the code for augmenting the data set with the Keras [ImageDataGenerator](https://keras.io/preprocessing/image/).
-I decided to generate additional data because the traffic sign classes where not balanced. 
+The sixth to ninth code cell of the IPython notebook contains the code for augmenting the data set with the Keras [ImageDataGenerator](https://keras.io/preprocessing/image/).
+I decided to generate additional data because the traffic sign classes were not balanced. 
 To add more data to the the data set, I used the following techniques
 
 1. rotation_range to simulate traffic signs on rising  roads with a max angle of 20°
-2. width_shift_range and height_shift_range to make the classfier more robust to where the traffic sign is located insight  the image 
-3. zoom_range to simulate different traffic sign sizes from the same type and that the sign ist not entirely  visible
+2. width_shift_range and height_shift_range to make the classifier more robust to where the traffic sign is located insight  the image 
+3. zoom_range to simulate different traffic sign sizes from the same type and that the sign is not entirely  visible
 
 After the data argumentation I saved the images to file for later reusability  
 
@@ -174,41 +174,41 @@ My final model results were:
 * validation set accuracy was in range of 0.982 to 0.987  
 * test set accuracy of 0.965 
 
-First I used the LeNet architecture because it was recomendet at the udacity course. I updated the model to handle the 43 output classes, better weight and bias initialisation and gray scale images.  
-I increased the size and count of the FC Layer and added dropout to prevent offerfiting. The two steps increased the test accuracy by arround 2%. 
-After that I tested the architecture descripted at [Pierre Sermanet and Yann LeCun](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) which lead to much better results. I added a aditional FC layer because ["No hidden layer should be less than a quarter of the input layer’s nodes."](https://deeplearning4j.org/troubleshootingneuralnets) 
+First I used the LeNet architecture because it was recommended at the udacity course. I updated the model to handle the 43 output classes, better weight and bias initialisation and gray scale images.  
+I increased the size and count of the FC Layer and added dropout to prevent overfitting. The two steps increased the test accuracy by around 2%. 
+After that I tested the architecture description at [Pierre Sermanet and Yann LeCun](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) which lead to much better results. I added an additional FC layer because ["No hidden layer should be less than a quarter of the input layer’s nodes."](https://deeplearning4j.org/troubleshootingneuralnets) 
 
-Additional steps to improve the accuracy could be to use inception modules to use different patch sizes at each convultional layer.  
+Additional steps to improve the accuracy could be to use inception modules to use different patch sizes at each convolutional layer.  
 
 #### The following image shows some traffic signs with wrong predictions 
 ![alt text][image13]
-One conclusion is that even with local histogram equalization bad light condions are one of the main problems to correctly classify traffic signs. 
+One conclusion is that even with local histogram equalization bad light conditions are one of the main problems to correctly classify traffic signs. 
 
 ### Test a Model on New Images
 
-#### 1. Choose sixthen German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+#### 1. Choose sixteen German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
 Here are some German traffic signs that I found on the web and the results of the predictions.
 The code for making predictions on my final model is located in the eighteenth and nineteenth cell of the Ipython notebook.
 
-| Image     | Expected Difficultys | Prediction |
+| Image     | Expected Difficulties | Prediction |
 |:---------------------:|:---------------------------------------------:|:---------------------:|
-| ![alt text][image20] | <ul><li> Watermarks </li><li> The image is smaler than the images in the trainings data  </li></ul>|![alt text][image20P] |
+| ![alt text][image20] | <ul><li> Watermarks </li><li> The image is smaller than the images in the trainings data  </li></ul>|![alt text][image20P] |
 | ![alt text][image21] | <ul><li> Watermarks </li></ul> |![alt text][image21P] |
 | ![alt text][image22] | <ul><li> Watermarks </li><li> Unusual traffic sign viewpoint  </li></ul> |![alt text][image22P] |
 | ![alt text][image23] | <ul><li> Unusual position </li></ul> |![alt text][image23P] |
-| ![alt text][image25] | <ul><li> No difficultys </li></ul> |![alt text][image25P] |
-| ![alt text][image26] | <ul><li> No difficultys </li></ul> |![alt text][image26P] |
-| ![alt text][image27] | <ul><li> No difficultys </li></ul> |![alt text][image27P] |
-| ![alt text][image30] | <ul><li> Watermarks </li><li> The image is smaler than the images in the trainings data  </li></ul> |![alt text][image30P] |
+| ![alt text][image25] | <ul><li> No difficulties </li></ul> |![alt text][image25P] |
+| ![alt text][image26] | <ul><li> No difficulties </li></ul> |![alt text][image26P] |
+| ![alt text][image27] | <ul><li> No difficulties </li></ul> |![alt text][image27P] |
+| ![alt text][image30] | <ul><li> Watermarks </li><li> The image is smaller than the images in the trainings data  </li></ul> |![alt text][image30P] |
 | ![alt text][image31] | <ul><li> Watermarks </li></ul> |![alt text][image31P] |
 | ![alt text][image32] | <ul><li> Watermarks </li></ul> |![alt text][image32P] |
-| ![alt text][image35] | <ul><li> No difficultys </li></ul> |![alt text][image35P] |
+| ![alt text][image35] | <ul><li> No difficulties </li></ul> |![alt text][image35P] |
 | ![alt text][image36] | <ul><li> traffic sign painted on the road </li></ul> |![alt text][image36P] |
-| ![alt text][image37] | <ul><li> No difficultys </li></ul> |![alt text][image37P] |
-| ![alt text][image40] | <ul><li> No difficultys </li></ul> |![alt text][image40P] |
-| ![alt text][image41] | <ul><li> No difficultys  </li></ul> |![alt text][image41P] |
+| ![alt text][image37] | <ul><li> No difficulties </li></ul> |![alt text][image37P] |
+| ![alt text][image40] | <ul><li> No difficulties </li></ul> |![alt text][image40P] |
+| ![alt text][image41] | <ul><li> No difficulties  </li></ul> |![alt text][image41P] |
 | ![alt text][image42] | <ul><li> Watermarks </li></ul> |![alt text][image42P] |
 
-The model was able to correctly guess 7 of the 16 traffic signs, which gives an accuracy of 37.5%. This result shows to thinks. First if the images look like the test images, traffic sign in the center of the image and a centered viewpoint are correctly classified. Second if that is not the case the classification results are not at a acceptable level. Different viewpoints is hardly to simulate with different viewpoints so only more images or no images with this viewpoints are the solution. 
+The model was able to correctly predict 7 of the 16 traffic signs, which gives an accuracy of 37.5%. This result shows to thinks. First if the images look like the test images, traffic sign in the center of the image and a centered viewpoint are correctly classified. Second if that is not the case the classification results are not at the acceptable level. Different viewpoints is hardly to simulate so only more images or no images with this viewpoints are the solution. 
 
