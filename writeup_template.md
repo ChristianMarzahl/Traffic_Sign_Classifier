@@ -1,4 +1,4 @@
-#**Traffic Sign Recognition** 
+# **Traffic Sign Recognition** 
 
 ---
 
@@ -95,7 +95,7 @@ The code for the barchart is contained in the fourth code cell
 The Traffic Sign distribution shows that the number of signs for each classes have a strong variance. At the data augmentation step, this problem should be addressed to prevent a classification bias at one class. 
 
 
-The following image show some example traffic signs and the code is  at the fifth cell of the notebook
+The following image shows an example of traffic signs and the code is at the fifth cell of the notebook
 
 ![alt text][image9]
 
@@ -106,22 +106,22 @@ The following image show some example traffic signs and the code is  at the fift
 
 The code for this step is contained in the sixt code cell of the IPython notebook.
 
-As a first step, I decided to convert the images to grayscale because the paper from [Pierre Sermanet and Yann LeCun](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) suggest that color don't have a big positive impact on the result. 
-At the same time I performed a image rezise to 32x32.
+As a first step, I decided to convert the images to grayscale because the paper from [Pierre Sermanet and Yann LeCun](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) suggests that color has no relevant impact on the result. 
+At the same time I performed a image resize to 32x32x1.
 
-To decrease the effect of different light conditions one the traffic signs I used a [local histogram equalization](http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html) 
+To decrease the effect of different light conditions of the traffic signs I used a [local histogram equalization](http://docs.opencv.org/3.1.0/d5/daf/tutorial_py_histogram_equalization.html) 
 
 ![alt text][image11]
 
-As a last step after the  Keras data argumentation, I normalized the image data because that's lead to a more stable convergence of weight and biases.
+As a last step after the  Keras data argumentation, I normalized the image data because this leads to a more stable convergence of weight and biases.
 
 #### 2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
 The traffic sign dataset was already splitted into train, test and validation. The code for loading the data is in the first code block. 
 
-The sixth to ninth code cell of the IPython notebook contains the code for augmenting the data set with the Keras [ImageDataGenerator](https://keras.io/preprocessing/image/).
-I decided to generate additional data because the traffic sign classes were not balanced. 
-To add more data to the the data set, I used the following techniques
+The sixth to ninth code cell of the IPython notebook contains the code for augmenting the data set with the Keras [ImageDataGenerator](https://keras.io/preprocessing/image/) class.
+I decided to generate additional data because the classes of traffic signs were not balanced. 
+To add more data to the the data set I used the following techniques
 
 1. rotation_range to simulate traffic signs on rising  roads with a max angle of 20°
 2. width_shift_range and height_shift_range to make the classifier more robust to where the traffic sign is located insight  the image 
@@ -135,7 +135,7 @@ Here is an example of augmented images:
 
 #### 3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-The code for my final model is located in the thirteenth  cell of the ipython notebook. 
+The code for my final model is located in the thirteenth cell of the ipython notebook. 
 
 My final model consisted of the following layers:
 
@@ -163,7 +163,7 @@ My final model consisted of the following layers:
 
 The code for training the model is located in the fourteenth to sixteenth  cell of the ipython notebook. 
 
-To train the model, I used an AdamOptimizer with a learning rate of 0.001. The batch_size was 256 and I trained for 100 Epochs. The training dropout rate was set to 0.25. For weight initialization I used the truncated_normal function with mean of 0 and standard deviation of 0.1
+To train the model, I used an AdamOptimizer with a learning rate of 0.001. The batch_size was 256 and I trained for 100 Epochs. The training dropout rate was set to 0.25. For weight initialization I used the truncated_normal function with a mean of 0 and a standard deviation of 0.1
 On my Windows machine I experienced a CuDNN exception that was not on the aws machine. That is the explanation for the line "evice_count = {'GPU': 0}" in my code to use CPU. 
 
 #### 5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
@@ -188,14 +188,14 @@ One conclusion is that even with local histogram equalization bad light conditio
 
 #### 1. Choose sixteen German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are some German traffic signs that I found on the web and the results of the predictions.
+Here are some German traffic signs, that I found on the web and the results of the predictions.
 The code for making predictions on my final model is located in the eighteenth and nineteenth cell of the Ipython notebook.
 
 | Image     | Expected Difficulties | Prediction |
 |:---------------------:|:---------------------------------------------:|:---------------------:|
 | ![alt text][image20] | <ul><li> Watermarks </li><li> The image is smaller than the images in the trainings data  </li></ul>|![alt text][image20P] |
 | ![alt text][image21] | <ul><li> Watermarks </li></ul> |![alt text][image21P] |
-| ![alt text][image22] | <ul><li> Watermarks </li><li> Unusual traffic sign viewpoint  </li></ul> |![alt text][image22P] |
+| ![alt text][image22] | <ul><li> Watermarks </li><li> Unusual traffic sign point of view  </li></ul> |![alt text][image22P] |
 | ![alt text][image23] | <ul><li> Unusual position </li></ul> |![alt text][image23P] |
 | ![alt text][image25] | <ul><li> No difficulties </li></ul> |![alt text][image25P] |
 | ![alt text][image26] | <ul><li> No difficulties </li></ul> |![alt text][image26P] |
@@ -210,5 +210,5 @@ The code for making predictions on my final model is located in the eighteenth a
 | ![alt text][image41] | <ul><li> No difficulties  </li></ul> |![alt text][image41P] |
 | ![alt text][image42] | <ul><li> Watermarks </li></ul> |![alt text][image42P] |
 
-The model was able to correctly predict 7 of the 16 traffic signs, which gives an accuracy of 37.5%. This result shows to thinks. First if the images look like the test images, traffic sign in the center of the image and a centered viewpoint are correctly classified. Second if that is not the case the classification results are not at the acceptable level. Different viewpoints is hardly to simulate so only more images or no images with this viewpoints are the solution. 
+The model was able to correctly predict 7 of the 16 traffic signs, which gives an accuracy of 37.5%. This result shows two things. Firstly, if the images look like the training images with the traffic sign in the center of the image and a centered viewpoint, they  are classified correctly. Secondly, if that is not the case the classification results are not at the acceptable level. Different viewpoints are hard to simulate.The only solution would be either more images or no images with this point of view.
 
