@@ -1,9 +1,5 @@
 #**Traffic Sign Recognition** 
 
-##Writeup Template
-
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
 ---
 
 **Build a Traffic Sign Recognition Project**
@@ -26,39 +22,59 @@ The goals / steps of this project are the following:
 [image10]: ./examples/traffic_sign_count_overview.png "Traffic Sign Overview Count"
 [image11]: ./examples/gray_adaptive_hist.png "gray_adaptive_hist"
 [image12]: ./examples/DataArgumentationGray.png "DataArgumentationGray"
+[image13]: ./examples/WrongPredicted.png
+[image14]: ./examples/PredictionProbabilitys.png
 
 [image20]: ./images/12/images%20(1).jpg "priority road"
+[image20P]: ./examples/TrafficSignPrediction/P1.png 
 [image21]: ./images/12/images%20(3).jpg "priority road"
+[image21P]: ./examples/TrafficSignPrediction/P2.png 
 [image22]: ./images/12/images%20(4).jpg "priority road"
+[image22P]: ./examples/TrafficSignPrediction/P3.png 
 [image23]: ./images/12/images.jpg "priority road"
+[image23P]: ./examples/TrafficSignPrediction/P4.png 
 
 [image25]: ./images/14/images%20(1).jpg "stop sign"
+[image25P]: ./examples/TrafficSignPrediction/S1.png 
 [image26]: ./images/14/images.jpg "stop sign"
+[image26P]: ./examples/TrafficSignPrediction/S2.png 
 [image27]: ./images/14/stop_1.jpg "stop sign"
+[image27P]: ./examples/TrafficSignPrediction/S3.png 
 
 [image30]: ./images/15/NoVehile.jpg 
+[image30P]: ./examples/TrafficSignPrediction/NP1.png 
 [image31]: ./images/15/images%20(1).jpg
+[image31P]: ./examples/TrafficSignPrediction/NP2.png 
 [image32]: ./images/15/images.jpg 
+[image32P]: ./examples/TrafficSignPrediction/NP3.png 
 
 [image35]: ./images/2/Speed2.jpg 
+[image35P]: ./examples/TrafficSignPrediction/50_1.png 
 [image36]: ./images/2/Speed_flat.jpg
+[image36P]: ./examples/TrafficSignPrediction/50_2.png
 [image37]: ./images/2/images.jpg
+[image37P]: ./examples/TrafficSignPrediction/50_3.png
 
 [image40]: ./images/22/bum.jpg
+[image40P]: ./examples/TrafficSignPrediction/B1.png 
 [image41]: ./images/22/bumb2.jpg
+[image41P]: ./examples/TrafficSignPrediction/B2.png 
 [image42]: ./images/22/bumby.jpg
+[image42P]: ./examples/TrafficSignPrediction/B3.png 
+
+
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
 ---
-###Writeup / README
+### Writeup / README
 
-####1. [project code](https://github.com/ChristianMarzahl/Traffic_Sign_Classifier/blob/master/Traffic_Sign_Classifier.ipynb)
+#### 1. [project code](https://github.com/ChristianMarzahl/Traffic_Sign_Classifier/blob/master/Traffic_Sign_Classifier.ipynb)
 
-###Data Set Summary & Exploration
+### Data Set Summary & Exploration
 
-####1. Provide a basic summary of the data set and identify where in your code the summary was done. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
+#### 1. Provide a basic summary of the data set and identify where in your code the summary was done. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
 The code for this step is contained in the second and third code cell of the IPython notebook.  
 
@@ -70,7 +86,7 @@ signs data set:
 * The shape of a traffic sign image is (32, 32, 3)
 * The number of unique classes/labels in the data set is 43
 
-####2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
+#### 2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
 The code for the barchart is contained in the fourth code cell
 
@@ -84,9 +100,9 @@ The following image show some example traffic signs and the code is  at the fift
 ![alt text][image9]
 
 
-###Design and Test a Model Architecture
+### Design and Test a Model Architecture
 
-####1. Describe how, and identify where in your code, you preprocessed the image data. What tecniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
+#### 1. Describe how, and identify where in your code, you preprocessed the image data. What tecniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
 
 The code for this step is contained in the sixt code cell of the IPython notebook.
 
@@ -99,11 +115,11 @@ To decrease the effect of different light conditions one the traffic signs I use
 
 As a last step after the  Keras data argumentation, I normalized the image data because thats lead to a more stable convergence of weight and biases.
 
-####2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
+#### 2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
 The traffic sign dataset was already splitted into train, test and validation. The code for loading the data is in the first code block. 
 
-The * * * code cell of the IPython notebook contains the code for augmenting the data set with the Keras [ImageDataGenerator](https://keras.io/preprocessing/image/).
+The sixt to ninth code cell of the IPython notebook contains the code for augmenting the data set with the Keras [ImageDataGenerator](https://keras.io/preprocessing/image/).
 I decided to generate additional data because the traffic sign classes where not balanced. 
 To add more data to the the data set, I used the following techniques
 
@@ -117,9 +133,9 @@ Here is an example of augmented images:
 
 ![alt text][image12]
 
-####3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+#### 3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-The code for my final model is located in the * * *  cell of the ipython notebook. 
+The code for my final model is located in the thirteenth  cell of the ipython notebook. 
 
 My final model consisted of the following layers:
 
@@ -143,84 +159,56 @@ My final model consisted of the following layers:
 
 
 
-####4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+#### 4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-The code for training the model is located in the * * *  cell of the ipython notebook. 
+The code for training the model is located in the fourteenth to sixteenth  cell of the ipython notebook. 
 
 To train the model, I used an AdamOptimizer with a learning rate of 0.001. The batch_size was 256 and I trained for 100 Epochs. The training dropout rate was set to 0.25. For weight initialization I used the truncated_normal function with mean of 0 and standard deviation of 0.1
 On my Windows machine I experienced a CuDNN exception that was not on the aws machine. That is the explanation for the line "evice_count = {'GPU': 0}" in my code to use CPU. 
 
-####5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+#### 5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
-The code for calculating the accuracy of the model is located in the * * * * cell of the Ipython notebook.
+The code for calculating the accuracy of the model is located in the seventeenth cell of the Ipython notebook.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* validation set accuracy was in range of 0.982 to 0.987  
+* test set accuracy of 0.965 
 
 First I used the LeNet architecture because it was recomendet at the udacity course. I updated the model to handle the 43 output classes, better weight and bias initialisation and gray scale images.  
 I increased the size and count of the FC Layer and added dropout to prevent offerfiting. The two steps increased the test accuracy by arround 2%. 
 After that I tested the architecture descripted at [Pierre Sermanet and Yann LeCun](http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf) which lead to much better results. I added a aditional FC layer because ["No hidden layer should be less than a quarter of the input layer’s nodes."](https://deeplearning4j.org/troubleshootingneuralnets) 
 
-Additional steps to improve the accuracy could be to use inception modules to use different patch sizes.  
+Additional steps to improve the accuracy could be to use inception modules to use different patch sizes at each convultional layer.  
 
+#### The following image shows some traffic signs with wrong predictions 
+![alt text][image13]
+One conclusion is that even with local histogram equalization bad light condions are one of the main problems to correctly classify traffic signs. 
 
-###Test a Model on New Images
+### Test a Model on New Images
 
-####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+#### 1. Choose sixthen German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are some German traffic signs that I found on the web:
+Here are some German traffic signs that I found on the web and the results of the predictions.
+The code for making predictions on my final model is located in the eighteenth and nineteenth cell of the Ipython notebook.
 
-| Image     | Difficultys |
-|:---------------------:|:---------------------------------------------:| 
-| ![alt text][image20] | <ul><li> Watermarks </li><li> The image is smaler than the images in the trainings data  </li></ul>|
-| ![alt text][image21] | <ul><li> Watermarks </li></ul> |
-| ![alt text][image22] | <ul><li> Watermarks </li><li> Unusual traffic sign viewpoint  </li></ul> |
-| ![alt text][image23] | <ul><li> Unusual position </li></ul> |
-| ![alt text][image25] | <ul><li> No difficultys </li></ul> |
-| ![alt text][image26] | <ul><li> No difficultys </li></ul> |
-| ![alt text][image27] | <ul><li> No difficultys </li></ul> |
-| ![alt text][image30] | <ul><li> Watermarks </li><li> The image is smaler than the images in the trainings data  </li></ul> |
-| ![alt text][image31] | <ul><li> Watermarks </li></ul> |
-| ![alt text][image32] | <ul><li> Watermarks </li></ul> |
-| ![alt text][image35] | <ul><li> No difficultys </li></ul> |
-| ![alt text][image36] | <ul><li> traffic sign painted on the road </li></ul> |
-| ![alt text][image37] | <ul><li> No difficultys </li></ul> |
-| ![alt text][image40] | <ul><li> No difficultys </li></ul> |
-| ![alt text][image41] | <ul><li> No difficultys  </li></ul> |
-| ![alt text][image42] | <ul><li> Watermarks </li></ul> |
+| Image     | Expected Difficultys | Prediction |
+|:---------------------:|:---------------------------------------------:|:---------------------:|
+| ![alt text][image20] | <ul><li> Watermarks </li><li> The image is smaler than the images in the trainings data  </li></ul>|![alt text][image20P] |
+| ![alt text][image21] | <ul><li> Watermarks </li></ul> |![alt text][image21P] |
+| ![alt text][image22] | <ul><li> Watermarks </li><li> Unusual traffic sign viewpoint  </li></ul> |![alt text][image22P] |
+| ![alt text][image23] | <ul><li> Unusual position </li></ul> |![alt text][image23P] |
+| ![alt text][image25] | <ul><li> No difficultys </li></ul> |![alt text][image25P] |
+| ![alt text][image26] | <ul><li> No difficultys </li></ul> |![alt text][image26P] |
+| ![alt text][image27] | <ul><li> No difficultys </li></ul> |![alt text][image27P] |
+| ![alt text][image30] | <ul><li> Watermarks </li><li> The image is smaler than the images in the trainings data  </li></ul> |![alt text][image30P] |
+| ![alt text][image31] | <ul><li> Watermarks </li></ul> |![alt text][image31P] |
+| ![alt text][image32] | <ul><li> Watermarks </li></ul> |![alt text][image32P] |
+| ![alt text][image35] | <ul><li> No difficultys </li></ul> |![alt text][image35P] |
+| ![alt text][image36] | <ul><li> traffic sign painted on the road </li></ul> |![alt text][image36P] |
+| ![alt text][image37] | <ul><li> No difficultys </li></ul> |![alt text][image37P] |
+| ![alt text][image40] | <ul><li> No difficultys </li></ul> |![alt text][image40P] |
+| ![alt text][image41] | <ul><li> No difficultys  </li></ul> |![alt text][image41P] |
+| ![alt text][image42] | <ul><li> Watermarks </li></ul> |![alt text][image42P] |
 
-####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+The model was able to correctly guess 7 of the 16 traffic signs, which gives an accuracy of 37.5%. This result shows to thinks. First if the images look like the test images, traffic sign in the center of the image and a centered viewpoint are correctly classified. Second if that is not the case the classification results are not at a acceptable level. Different viewpoints is hardly to simulate with different viewpoints so only more images or no images with this viewpoints are the solution. 
 
-The code for making predictions on my final model is located in the tenth cell of the Ipython notebook.
-
-Here are the results of the prediction:
-
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
-
-
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
-
-####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
-
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
-
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
-
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
-
-
-For the second image ... 
