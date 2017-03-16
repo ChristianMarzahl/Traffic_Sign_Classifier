@@ -171,8 +171,8 @@ On my Windows machine I experienced a CuDNN exception that was not on the aws ma
 The code for calculating the accuracy of the model is located in the seventeenth cell of the Ipython notebook.
 
 My final model results were:
-* validation set accuracy was in range of 0.982 to 0.987  
-* test set accuracy of 0.965 
+* validation set accuracy was in range of <b> 0.982 to 0.987  </b>
+* test set accuracy of <b> 0.965  </b>
 
 First I used the LeNet architecture because it was recommended at the udacity course. I updated the model to handle the 43 output classes, better weight and bias initialisation and gray scale images.  
 I increased the size and count of the FC Layer and added dropout to prevent overfitting. The two steps increased the test accuracy by around 2%. 
@@ -191,24 +191,26 @@ One conclusion is that even with local histogram equalization bad light conditio
 Here are some German traffic signs, that I found on the web and the results of the predictions.
 The code for making predictions on my final model is located in the eighteenth and nineteenth cell of the Ipython notebook.
 
-| Image     | Expected Difficulties | Prediction |
-|:---------------------:|:---------------------------------------------:|:---------------------:|
-| ![alt text][image20] | <ul><li> Watermarks </li><li> The image is smaller than the images in the trainings data  </li></ul>|![alt text][image20P] |
-| ![alt text][image21] | <ul><li> Watermarks </li></ul> |![alt text][image21P] |
-| ![alt text][image22] | <ul><li> Watermarks </li><li> Unusual traffic sign point of view  </li></ul> |![alt text][image22P] |
-| ![alt text][image23] | <ul><li> Unusual position </li></ul> |![alt text][image23P] |
-| ![alt text][image25] | <ul><li> No difficulties </li></ul> |![alt text][image25P] |
-| ![alt text][image26] | <ul><li> No difficulties </li></ul> |![alt text][image26P] |
-| ![alt text][image27] | <ul><li> No difficulties </li></ul> |![alt text][image27P] |
-| ![alt text][image30] | <ul><li> Watermarks </li><li> The image is smaller than the images in the trainings data  </li></ul> |![alt text][image30P] |
-| ![alt text][image31] | <ul><li> Watermarks </li></ul> |![alt text][image31P] |
-| ![alt text][image32] | <ul><li> Watermarks </li></ul> |![alt text][image32P] |
-| ![alt text][image35] | <ul><li> No difficulties </li></ul> |![alt text][image35P] |
-| ![alt text][image36] | <ul><li> traffic sign painted on the road </li></ul> |![alt text][image36P] |
-| ![alt text][image37] | <ul><li> No difficulties </li></ul> |![alt text][image37P] |
-| ![alt text][image40] | <ul><li> No difficulties </li></ul> |![alt text][image40P] |
-| ![alt text][image41] | <ul><li> No difficulties  </li></ul> |![alt text][image41P] |
-| ![alt text][image42] | <ul><li> Watermarks </li></ul> |![alt text][image42P] |
+##### The accuracy on the captured images is 37.5% while it was 96.5% on the testing set thus It seems the model is overfitting and not able to generalise or differentiate numbers. A detailed discussion is under the following table.  
 
-The model was able to correctly predict 7 of the 16 traffic signs, which gives an accuracy of 37.5%. This result shows two things. Firstly, if the images look like the training images with the traffic sign in the center of the image and a centered viewpoint, they  are classified correctly. Secondly, if that is not the case the classification results are not at the acceptable level. Different viewpoints are hard to simulate.The only solution would be either more images or no images with this point of view.
+| Image     | Expected Difficulties | Prediction | Discussion | 
+|:---------------------:|:---------------------:|:---------------------------------------------:|:---------------------:|
+| ![alt text][image20] | <ul><li> Watermarks </li><li> The image is smaller than the images in the trainings data  </li></ul>|![alt text][image20P] | The prediction is correct  |
+| ![alt text][image21] | <ul><li> Watermarks </li></ul> |![alt text][image21P] | The classifier is very uncertain and priority road is not on the top five list  |
+| ![alt text][image22] | <ul><li> Watermarks </li><li> Unusual traffic sign point of view  </li></ul> |![alt text][image22P] | Priority road is in the top five but the classifier is very certain that this is a Keep left sign  |
+| ![alt text][image23] | <ul><li> Unusual position </li></ul> |![alt text][image23P] | The classifier is sure that that is a speed limitation sign but that is wrong. |
+| ![alt text][image25] | <ul><li> No difficulties </li></ul> |![alt text][image25P] | correctly predicted as Stop sign with a high probability   |
+| ![alt text][image26] | <ul><li> No difficulties </li></ul> |![alt text][image26P] | correctly predicted as Stop sign with a high probability  |
+| ![alt text][image27] | <ul><li> No difficulties </li></ul> |![alt text][image27P] | correctly predicted as Stop sign with a high probability  |
+| ![alt text][image30] | <ul><li> Watermarks </li><li> The image is smaller than the images in the trainings data  </li></ul> |![alt text][image30P] | The end of speed limit is wrong even if the classifier is very sure. Correct prediction not in the top five |
+| ![alt text][image31] | <ul><li> Watermarks </li></ul> |![alt text][image31P] | For the classifier two signs have nearly the same likelihood but the correct answer is a little higher |
+| ![alt text][image32] | <ul><li> Watermarks </li></ul> |![alt text][image32P] | Slippery road is for the classifier more likely than the correct prediction possible a result of the watermark at the sign center  |
+| ![alt text][image35] | <ul><li> No difficulties </li></ul> |![alt text][image35P] | The classifier is sure that this is a speed limitation sign but predict 80 instead of 50 |
+| ![alt text][image36] | <ul><li> traffic sign painted on the road </li></ul> |![alt text][image36P] | The speed limit sign painted on the road is miss classified as 20 instead of 50 which is not in the top five |
+| ![alt text][image37] | <ul><li> No difficulties </li></ul> |![alt text][image37P] | Again the classifier is not able to  differentiate between numbers on the speed limitation signs  |
+| ![alt text][image40] | <ul><li> No difficulties </li></ul> |![alt text][image40P] | Misclassified slippery road with bumpy road be a large margin |
+| ![alt text][image41] | <ul><li> No difficulties  </li></ul> |![alt text][image41P] | The prediction is correct |
+| ![alt text][image42] | <ul><li> Watermarks </li></ul> |![alt text][image42P] | The prediction is correct |
+
+The model was able to correctly predict 7 of the 16 traffic signs, which gives an accuracy of 37.5%. This result shows <b> three </b> things. <b> Firstly </b>, if the images look like the training images with the traffic sign in the center of the image and a centered viewpoint, they  are classified correctly. <b> Secondly </b>, if that is not the case the classification results are not at the acceptable level. Different viewpoints are hard to simulate.The only solution would be either more images or no images with this point of view. <b> Thirdly </b> the classifier is not able to differentiate between numbers. 
 
