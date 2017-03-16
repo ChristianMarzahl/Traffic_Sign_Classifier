@@ -24,6 +24,7 @@ The goals / steps of this project are the following:
 [image12]: ./examples/DataArgumentationGray.png "DataArgumentationGray"
 [image13]: ./examples/WrongPredicted.png
 [image14]: ./examples/PredictionProbabilitys.png
+[image15]: ./examples/BalancedSignCount.png
 
 [image20]: ./images/12/images%20(1).jpg "priority road"
 [image20P]: ./examples/TrafficSignPrediction/P1.png 
@@ -132,6 +133,10 @@ After the data argumentation I saved the images to file for later reusability
 Here is an example of augmented images:
 
 ![alt text][image12]
+
+and the new sign distribution 
+
+![alt text][image15]
 
 #### 3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
